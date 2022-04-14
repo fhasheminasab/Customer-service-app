@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  customerDb:
+    image: mongo
+
+  customerserviceapp:
+    image: ${DOCKER_REGISTRY-}customerserviceapp
+    build:
+      context: .
+      dockerfile: Customer service app/Dockerfile
+
+volumes:
+  mongo_data:

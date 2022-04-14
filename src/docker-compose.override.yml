@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  customerDb:
+    container_name: customerDb
+    restart: always
+    ports: 
+      - "27017:27017"
+    volumes:
+      -mongo_data:/data 
+  customerserviceapp:
+    container_name: customer.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://CustomerDb:27017"
+    depends_on:
+      - CustomerDb
+    ports:
+      - "8000:80"
